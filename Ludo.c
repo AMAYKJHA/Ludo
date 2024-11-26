@@ -8,7 +8,7 @@ char *player[4] = {"Red", "Blue", "Yellow", "Green"};
 char pawn[4] = "RBYG";
 char color[4][4] = {{'R', 'R', 'R', 'R'}, {'B', 'B', 'B', 'B'}, {'Y', 'Y', 'Y', 'Y'}, {'G', 'G', 'G', 'G'}}; ////// pawn inside home
 char *num1[6] = {"One", "Two", "Three", "Four", "Five", "Six"};
-char *num2[6]={"एक", "दुई", "तीन", "चार", "पाँच", "छ"};
+char *num2[6] = {"एक", "दुई", "तीन", "चार", "पाँच", "छ"};
 void newgame();
 void aboutgame();
 void setting();
@@ -101,6 +101,14 @@ void newgame()
 	}
 	scanf("%d", &mode);
 	system("cls");
+	if (lang == 1)
+	{
+		printf("\t\tPress any key to begin the game..\n");
+	}
+	else
+	{
+		printf("\t\tखेल सुरु गर्न कुनै पनि बटन थिच्नुहोस्..\n");
+	}
 	getch();
 	int limit = 16;
 	for (int k = 0; total < limit; k++)
@@ -125,12 +133,16 @@ void newgame()
 		if (theme == 2)
 			printf("\e[1;36m");
 		ludoboard();
+		printf("\t\tNeed %d to take a pawn out\n", p_out);
 		if (theme == 2)
 			paint(k);
 		printf("\t%s:\n", player[k % 4]);
-		if(lang==1){
-		printf("\tPress any key to roll the dice\n");}
-		else{
+		if (lang == 1)
+		{
+			printf("\tPress any key to roll the dice\n");
+		}
+		else
+		{
 			printf("\tपासा फलाउनको लागि कुनै बटन थिच्नुहोस्।\n");
 		}
 		getch();
@@ -138,15 +150,20 @@ void newgame()
 		dice = rand() % 6 + 1;
 		if (theme == 2)
 			printf("\e[1;0m");
-		if(lang==1){
-		printf("\tDice:==> %d(%s)\n", dice, num1[dice - 1]);}
-		else{
-			printf("\tपासा:==> %d(%s)\n",dice,num2[dice-1]);
+		if (lang == 1)
+		{
+			printf("\tDice:==> %d(%s)\n", dice, num1[dice - 1]);
+		}
+		else
+		{
+			printf("\tपासा:==> %d(%s)\n", dice, num2[dice - 1]);
 		}
 		if (theme == 2)
 			paint(k);
-		if(lang==1){
-		printf("\tPress any key to move your pawn.\n");}
+		if (lang == 1)
+		{
+			printf("\tPress any key to move your pawn.\n");
+		}
 		else
 		{
 			printf("\tआफ्नो मोहरा चाल्नलाई कुनै बटन थिच्नुहोस्।\n");
@@ -174,10 +191,12 @@ void newgame()
 		}
 		total = reached[0] + reached[1] + reached[2] + reached[3];
 	}
-	if(lang==1){
-	printf("\nHope you enjoyed the game.\n");
+	if (lang == 1)
+	{
+		printf("\nHope you enjoyed the game.\n");
 	}
-	else{
+	else
+	{
 		printf("\nआशा छ तपाईंको खेल रमाइलो भयो।\n");
 	}
 }
@@ -206,8 +225,9 @@ void setting()
 		printf("\t\t1.English\n");
 		printf("\t\t2.नेपाली\n\t\t\t");
 		scanf("%d", &input);
-		if(input==1 || input==2){
-			lang=input;
+		if (input == 1 || input == 2)
+		{
+			lang = input;
 		}
 	}
 	else
@@ -233,7 +253,7 @@ void aboutgame()
 	printf("2.Once dice is rolled, press any key to move your pawn.\n");
 	printf("3.Pawn can move only under satisfied condition.\n");
 	printf("4.Must get a fixed value 1 or 6(default 1) on dice to take a pawn out.\n");
-	printf("5.*New pawn can only be taken out after the previous pawn is reached its final destination.\n");
+	printf("5.*New pawn can only be taken out after the previous pawn has reached its final destination.\n");
 	printf("6.A player can roll dice only once in their turn.\n\n");
 	printf("Enter 0 to go to main menu.\n");
 	scanf("%d", &opt);
@@ -246,20 +266,23 @@ void aboutgame()
 
 void ludoboard()
 {
-	if(lang==1){
-	printf("\t\t\tENJOY YOUR GAME\n");}
-	else{
+	if (lang == 1)
+	{
+		printf("\t\t\tENJOY YOUR GAME\n");
+	}
+	else
+	{
 		printf("\t\t\tखेलको आनन्द लिनुहोस्।\n");
 	}
-	//Top border line
+	// Top border line
 	printf("\t");
 	for (int col = 1; col <= 45; col++)
 	{
 		printf(":");
 	}
 
-	//Middle lines
-	//row->row col->column
+	// Middle lines
+	// row->row col->column
 	for (int row = 1; row <= 20; row++)
 	{
 		printf("\n\t||");
@@ -282,7 +305,7 @@ void ludoboard()
 
 			else
 			{
-				///Array box placing
+				/// Array box placing
 				if (col == 15 && row == 1)
 				{
 					pawn_color(box[10]);
@@ -388,8 +411,8 @@ void ludoboard()
 					pawn_color(box[22]);
 				}
 
-				//Pawns inside home
-				//Green
+				// Pawns inside home
+				// Green
 				else if (col == 3 && row == 2)
 				{
 					pawn_color(color[3][3]);
@@ -407,7 +430,7 @@ void ludoboard()
 					pawn_color(color[3][1]);
 				}
 
-				//Yellow
+				// Yellow
 				else if (col == 33 && row == 2)
 				{
 					pawn_color(color[2][0]);
@@ -425,7 +448,7 @@ void ludoboard()
 					pawn_color(color[2][2]);
 				}
 
-				//Red
+				// Red
 				else if (col == 3 && row == 17)
 				{
 					pawn_color(color[0][2]);
@@ -443,7 +466,7 @@ void ludoboard()
 					pawn_color(color[0][0]);
 				}
 
-				//Blue
+				// Blue
 				else if (col == 33 && row == 17)
 				{
 					pawn_color(color[1][1]);
@@ -558,7 +581,7 @@ void ludoboard()
 					pawn_color(home[3][1]);
 				}
 
-				//Reached pawns count
+				// Reached pawns count
 				else if (col == 19 && row == 11)
 				{
 					printf("%d", reached[0]);
@@ -613,7 +636,7 @@ void ludoboard()
 		printf("||");
 	}
 
-	//Bottom border line
+	// Bottom border line
 	printf("\n\t");
 	for (int col = 1; col <= 45; col++)
 	{
@@ -731,7 +754,7 @@ void pawn_color(char col)
 void move_red(int dice)
 {
 	int cg = 0;
-	int chk = chk_vac(0); //4 full
+	int chk = chk_vac(0); // 4 full
 	if (chk == 4)
 	{
 		if (dice == p_out)
@@ -774,7 +797,7 @@ void move_red(int dice)
 				int mv = i + dice;
 				if (mv < 26)
 				{
-					if (mv % 6 == 0 && mv < 24) //for sbox
+					if (mv % 6 == 0 && mv < 24) // for sbox
 					{
 						for (int j = 0; j < 3; j++)
 						{
@@ -931,7 +954,7 @@ void move_red(int dice)
 void move_blue(int dice)
 {
 	int cg = 0;
-	int chk = chk_vac(1); //4 full
+	int chk = chk_vac(1); // 4 full
 	if (chk == 4)
 	{
 		if (dice == p_out)
@@ -973,7 +996,7 @@ void move_blue(int dice)
 			{
 				int mv = i + dice;
 				if (mv > 23)
-				{ //junction 23
+				{ // junction 23
 					if (mv == 24)
 					{
 						for (int j = 0; j < 3; j++)
@@ -995,8 +1018,8 @@ void move_blue(int dice)
 						box[mv - 24] = 'B';
 						box[i] = ' ';
 					}
-				}										 //junction
-				else if ((i > 12 && i <= 17) && mv > 17) //junc home
+				} // junction
+				else if ((i > 12 && i <= 17) && mv > 17) // junc home
 				{
 					if (mv < 20)
 					{
@@ -1017,7 +1040,7 @@ void move_blue(int dice)
 				}
 				else
 				{
-					if (mv % 6 == 0) //for sbox
+					if (mv % 6 == 0) // for sbox
 					{
 						for (int j = 0; j < 3; j++)
 						{
@@ -1159,7 +1182,7 @@ void move_blue(int dice)
 void move_yellow(int dice)
 {
 	int cg = 0;
-	int chk = chk_vac(2); //4 full
+	int chk = chk_vac(2); // 4 full
 	if (chk == 4)
 	{
 		if (dice == p_out)
@@ -1201,7 +1224,7 @@ void move_yellow(int dice)
 			{
 				int mv = i + dice;
 				if (mv > 23)
-				{ //junction 23
+				{ // junction 23
 					if (mv == 24)
 					{
 						for (int j = 0; j < 3; j++)
@@ -1223,8 +1246,8 @@ void move_yellow(int dice)
 						box[mv - 24] = 'Y';
 						box[i] = ' ';
 					}
-				}										//junction
-				else if ((i > 6 && i <= 11) && mv > 11) //junc home
+				} // junction
+				else if ((i > 6 && i <= 11) && mv > 11) // junc home
 				{
 					if (mv < 14)
 					{
@@ -1245,7 +1268,7 @@ void move_yellow(int dice)
 				}
 				else
 				{
-					if (mv % 6 == 0) //for sbox
+					if (mv % 6 == 0) // for sbox
 					{
 						for (int j = 0; j < 3; j++)
 						{
@@ -1387,7 +1410,7 @@ void move_yellow(int dice)
 void move_green(int dice)
 {
 	int cg = 0;
-	int chk = chk_vac(3); //4 full
+	int chk = chk_vac(3); // 4 full
 	if (chk == 4)
 	{
 		if (dice == p_out)
@@ -1429,7 +1452,7 @@ void move_green(int dice)
 			{
 				int mv = i + dice;
 				if (mv > 23)
-				{ //junction 23
+				{ // junction 23
 					if (mv == 24)
 					{
 						for (int j = 0; j < 3; j++)
@@ -1451,8 +1474,8 @@ void move_green(int dice)
 						box[mv - 24] = 'G';
 						box[i] = ' ';
 					}
-				}									  //junction
-				else if ((i > 0 && i <= 5) && mv > 5) //junc home
+				} // junction
+				else if ((i > 0 && i <= 5) && mv > 5) // junc home
 				{
 					if (mv < 8)
 					{
@@ -1473,7 +1496,7 @@ void move_green(int dice)
 				}
 				else
 				{
-					if (mv % 6 == 0) //for sbox
+					if (mv % 6 == 0) // for sbox
 					{
 						for (int j = 0; j < 3; j++)
 						{
