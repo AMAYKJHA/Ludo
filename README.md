@@ -34,7 +34,7 @@ About Game<br>
 Exit Game<br>
 Select an option by entering the corresponding number.<br>
 
-###Main Menu
+### Main Menu
 New Game: Starts a new game.<br>
 Game settings: Allows you to change game settings such as language and theme.<br>
 About Game: Displays information about the game.<br>
